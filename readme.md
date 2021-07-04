@@ -5,7 +5,13 @@ A very simple web component for browser based presentations
 ## Install
 
 ```sh
-npm install html-presentations
+npm install lit pure-lit html-presentations
+```
+
+from cdn
+
+```html
+<script type="module" src="https://unpkg.com/html-presentations?module"></script>
 ```
 
 ## Usage
