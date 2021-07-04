@@ -30,7 +30,7 @@ const plugins = [
 const esmDemoBundle = {
     input,
     output: {
-        file: `public/app.js`,
+        file: `docs/app.js`,
         format: "esm",
         sourcemap: true
     },
