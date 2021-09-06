@@ -7,10 +7,12 @@ import { lesson, lessons, prism } from "./blocks.styles";
 const clickEvent = "html-presentations/block-lessons/click";
 pureLit("block-lessons", (el) => {
     const { getState: clicks, publish: setClicks } = useState(el, 0)
-    el.addEventListener("click", () => {
-        const next = clicks() + 1;
-        setClicks(next);
-        window.postMessage({ type: clickEvent, clicks: next, source: el.id }, window.origin)
+    useOnce(el, () => {
+        el.addEventListener("click", () => {
+            const next = clicks() + 1;
+            setClicks(next);
+            window.postMessage({ type: clickEvent, clicks: next, source: el.id }, window.origin)
+        })
     })
     return html`<slot></slot>`
 }, {
