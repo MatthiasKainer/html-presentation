@@ -87,18 +87,26 @@
       </presentation-slide>
       <presentation-slide>
         <block-code lang="javascript">
-          // supports syntax highlight if ("block-code") {
-          console.log("highlighting it!"); }
+          // supports syntax highlight 
+          if ("block-code") {
+            console.log("highlighting it!"); 
+          }
         </block-code>
         <block-code lang="markup">
           <block-code> This is highlighted markup! </block-code>
         </block-code>
         <block-code lang="clike">
-          public class Program { public static async Task Main(string[] args) {
-          var builder = CreateWebHostBuilder(args); var task = Task.Run(() => {
-          builder.Run(); }); Thread.Sleep(500); var output = await new
-          HttpClient().GetStringAsync("http://localhost:5000");
-          Console.WriteLine(output); } }
+          public class Program { 
+            public static async Task Main(string[] args) {
+              var builder = CreateWebHostBuilder(args); 
+              var task = Task.Run(() => {
+                builder.Run(); 
+              }); 
+              Thread.Sleep(500); 
+              var output = await new HttpClient().GetStringAsync("http://localhost:5000");
+              Console.WriteLine(output); 
+            } 
+          }
         </block-code>
       </presentation-slide>
       <presentation-slide last>
