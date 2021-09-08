@@ -54,6 +54,9 @@ pureLit(
           (element.style as any).zoom = "0.5";
         } 
       })
+      if (window.location.hash === `#${myIndex}`) {
+        element.scrollIntoView();
+      }
     })
     return html`<slot></slot> ${element.last
       ? ''
@@ -62,6 +65,7 @@ pureLit(
           role="next-slide"
           @click=${() => {
             window.postMessage({ type: events.slide.switchTo, payload: myIndex + 1 }, location.href);
+            window.location.hash = `#${myIndex + 1}`
           }}
         >
           next
@@ -73,6 +77,7 @@ pureLit(
           role="previous-slide"
           @click=${() => {
             window.postMessage({ type: events.slide.switchTo, payload: myIndex - 1 }, location.href);
+            window.location.hash = `#${myIndex - 1}`
           }}
         >
           prev
