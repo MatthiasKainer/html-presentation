@@ -8,13 +8,15 @@ import * as events from "./events"
 pureLit("block-lessons", (el) => {
     const { getState: clicks, publish: setClicks } = useState(el, 0)
     useOnce(el, () => {
-        el.addEventListener("click", () => {
+        const click = () => {
             const next = Math.min(clicks(), Number.MAX_SAFE_INTEGER-1) + 1;
             setClicks(next);
             window.postMessage({ type: events.block.click, clicks: next, source: el.id }, window.origin)
-        })
+        }
+        el.addEventListener("click", click);
         window.addEventListener('message', (event) => {
             if (event.data?.type === events.config.setPreviewMode) {
+                el.id = `${el.id}-preview-mode`
                 setClicks(Number.MAX_SAFE_INTEGER);
                 window.postMessage({ type: events.block.click, clicks: Number.MAX_SAFE_INTEGER, source: el.id }, window.origin)
             }
