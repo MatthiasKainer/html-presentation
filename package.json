@@ -1,12 +1,13 @@
 {
   "name": "html-presentations",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Very lightweight webcomponent for presentations.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
   "system": "lib/index.system.js",
   "scripts": {
     "build": "rollup -c",
+    "prepublish": "npm run build && npm test && git commit -am\"Release new version\" && git push",
     "test": "jest"
   },
   "keywords": [],

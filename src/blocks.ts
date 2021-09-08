@@ -37,7 +37,7 @@ pureLit("block-lesson", (el: LitElementWithProps<BlockLesson>) => {
     useOnce(el, () => {
         window.addEventListener('message', (event) => {
             if (event.origin !== window.origin) return;
-            if (event.data?.type === events.block.click && event.data?.source !== el.parentElement?.id) {
+            if (event.data?.type === events.block.click && event.data?.source === el.parentElement?.id) {
                 setClicks(event.data["clicks"]);
             }
         });
