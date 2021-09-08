@@ -1,5 +1,6 @@
 import { css, html } from "lit";
-import { LitElementWithProps, pureLit } from "pure-lit";
+import { LitElementWithProps, pureLit, useOnce } from "pure-lit";
+import * as events from "./events"
 
 const styles = css`
   :host {
@@ -37,13 +38,30 @@ type Props = {first: boolean; last: boolean};
 
 pureLit(
   'presentation-slide',
-  (element: LitElementWithProps<Props>) => html`<slot></slot> ${element.last
+  (element: LitElementWithProps<Props>) => {
+    const myIndex = [...document.querySelectorAll("presentation-slide")].findIndex(val => {
+      return val === element
+    })
+    useOnce(element, () => {
+      window.addEventListener("message", (evt) => {
+        if (evt.data?.type === events.slide.switchTo && evt.data?.payload === myIndex) {
+          element.scrollIntoView();
+        }
+        if (evt.data?.type === events.config.setPreviewMode) {
+          console.log("Slide in preview mode")
+          element.style.height = "50%";
+          element.style.width = "50%";
+          (element.style as any).zoom = "0.5";
+        } 
+      })
+    })
+    return html`<slot></slot> ${element.last
       ? ''
       : html`<div
           class="scroller next"
           role="next-slide"
           @click=${() => {
-            element.nextElementSibling?.scrollIntoView();
+            window.postMessage({ type: events.slide.switchTo, payload: myIndex + 1 }, location.href);
           }}
         >
           next
@@ -54,16 +72,17 @@ pureLit(
           class="scroller"
           role="previous-slide"
           @click=${() => {
-            element.previousElementSibling?.scrollIntoView();
+            window.postMessage({ type: events.slide.switchTo, payload: myIndex - 1 }, location.href);
           }}
         >
           prev
-        </div>`}`,
-        {
-          styles,
-          defaults: {
-            first: false,
-            last: false
-          }
-        }
+        </div>`}`
+  },
+  {
+    styles,
+    defaults: {
+      first: false,
+      last: false
+    }
+  }
 );

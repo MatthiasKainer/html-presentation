@@ -3,15 +3,21 @@ import { unsafeHTML } from 'lit-html/directives/unsafe-html.js';
 
 import { LitElementWithProps, pureLit, useOnce, useState } from "pure-lit";
 import { lesson, lessons, prism } from "./blocks.styles";
+import * as events from "./events"
 
-const clickEvent = "html-presentations/block-lessons/click";
 pureLit("block-lessons", (el) => {
     const { getState: clicks, publish: setClicks } = useState(el, 0)
     useOnce(el, () => {
         el.addEventListener("click", () => {
-            const next = clicks() + 1;
+            const next = Math.min(clicks(), Number.MAX_SAFE_INTEGER-1) + 1;
             setClicks(next);
-            window.postMessage({ type: clickEvent, clicks: next, source: el.id }, window.origin)
+            window.postMessage({ type: events.block.click, clicks: next, source: el.id }, window.origin)
+        })
+        window.addEventListener('message', (event) => {
+            if (event.data?.type === events.config.setPreviewMode) {
+                setClicks(Number.MAX_SAFE_INTEGER);
+                window.postMessage({ type: events.block.click, clicks: Number.MAX_SAFE_INTEGER, source: el.id }, window.origin)
+            }
         })
     })
     return html`<slot></slot>`
@@ -30,8 +36,10 @@ pureLit("block-lesson", (el: LitElementWithProps<BlockLesson>) => {
     const { getState: clicks, publish: setClicks } = useState<number>(el, 0)
     useOnce(el, () => {
         window.addEventListener('message', (event) => {
-            if (event.origin !== window.origin || event.data["source"] !== el.parentElement?.id || event.data["type"] !== clickEvent) return;
-            setClicks(event.data["clicks"]);
+            if (event.origin !== window.origin) return;
+            if (event.data?.type === events.block.click){
+                setClicks(event.data["clicks"]);
+            }
         });
     })
     return html`<slot class="${appearOnClick <= clicks() ? " visible" : "hidden" }"></slot>`

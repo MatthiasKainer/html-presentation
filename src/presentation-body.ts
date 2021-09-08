@@ -1,5 +1,6 @@
 import { pureLit, useOnce } from "pure-lit"
 import { css, html } from "lit"
+import * as events from "./events"
 
 function init() {
   const style = document.createElement("style")
@@ -29,6 +30,12 @@ function openFullscreen(el: HTMLElement) {
   }
 }
 
+let windowObjectReference : Window | null;
+let windowFeatures = "resizable,scrollbars";
+
+window.addEventListener("message", (evt) => {
+  windowObjectReference?.postMessage(evt.data, location.href)
+})
 
 export default pureLit("presentation-body", (el) => {
   useOnce(el, init)
@@ -37,6 +44,16 @@ export default pureLit("presentation-body", (el) => {
       if (event.ctrlKey && event.key === 'o') {
         console.log("opening fullscreen")
         openFullscreen(el)
+      }
+      if (event.ctrlKey && event.key === 'c') {
+        console.log("opening second window")
+        if (windowObjectReference) {
+          windowObjectReference.close();
+        }
+        windowObjectReference = window.open(window.location.href, "popup", windowFeatures);
+        windowObjectReference?.addEventListener("load", () => {
+          windowObjectReference?.postMessage({ type: events.config.setPreviewMode }, location.href);
+        });
       }
     });
   })
