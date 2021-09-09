@@ -3,61 +3,21 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Todo List</title>
+    <title>MatthiasKainer/html-template</title>
     <script type="module" src="app.js"></script>
-    <style>
-      /* devanagari */
-      @font-face {
-        font-family: "Martel Sans";
-        font-style: normal;
-        font-weight: 200;
-        font-display: swap;
-        src: local("Martel Sans ExtraLight"), local("MartelSans-ExtraLight"),
-          url(https://fonts.gstatic.com/s/martelsans/v6/h0GxssGi7VdzDgKjM-4d8hAX5vuBH0gFq9xRc5g.woff2)
-            format("woff2");
-        unicode-range: U+0900-097F, U+1CD0-1CF6, U+1CF8-1CF9, U+200C-200D,
-          U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FB;
-      }
-      /* latin-ext */
-      @font-face {
-        font-family: "Martel Sans";
-        font-style: normal;
-        font-weight: 200;
-        font-display: swap;
-        src: local("Martel Sans ExtraLight"), local("MartelSans-ExtraLight"),
-          url(https://fonts.gstatic.com/s/martelsans/v6/h0GxssGi7VdzDgKjM-4d8hAX5vuOH0gFq9xRc5g.woff2)
-            format("woff2");
-        unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
-          U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-      }
-      /* latin */
-      @font-face {
-        font-family: "Martel Sans";
-        font-style: normal;
-        font-weight: 200;
-        font-display: swap;
-        src: local("Martel Sans ExtraLight"), local("MartelSans-ExtraLight"),
-          url(https://fonts.gstatic.com/s/martelsans/v6/h0GxssGi7VdzDgKjM-4d8hAX5vuAH0gFq9xR.woff2)
-            format("woff2");
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
-          U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193,
-          U+2212, U+2215, U+FEFF, U+FFFD;
-      }
-      .pushToMiddle {
-        margin-top: 20%;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
+
   </head>
   <body>
     <presentation-body>
       <presentation-slide first>
         <h1 class="pushToMiddle">Welcome to the presentation</h1>
-        <h2>Press CTRL+o to open in fullscreen mode, or CTRL+c to open a preview window</h2>
+        <h2>Press CTRL+c to open a preview window, then move it to the side and click on next</h2>
       </presentation-slide>
       <presentation-slide>
         <block-lesson>
-          <h1 class="pushToMiddle">Lessons</h1>
-          <h2>Specific blocks that can be used as outline</h2>
+          <h2 class="pushToMiddle">Lessons</h2>
+          <h3>Specific blocks that can be used as outline. Press CTRL+o now to open me in fullscreen mode</h3>
         </block-lesson>
       </presentation-slide>
       <presentation-slide>
@@ -69,48 +29,55 @@
           </block-lesson>
           <block-lesson appearOnClick="1">
             <h3 class="lesson">Lesson 2</h3>
-            <h4 class="lesson">I learned to learn</h4>
+            <h4 class="lesson">As you see in the preview, all lessons will be visible there. There are more lessons, click again!</h4>
           </block-lesson>
           <block-lesson appearOnClick="2">
             <h3 class="lesson">Lesson 3</h3>
-            <h4 class="lesson">I learned to learn</h4>
+            <h4 class="lesson">Uh, the next one you will love - click once more!</h4>
           </block-lesson>
-          <block-lesson appearOnClick="3">
-            <h3 class="lesson">Lesson 4</h3>
-            <h4 class="lesson">I learned to learn</h4>
-          </block-lesson>
-          <block-lesson appearOnClick="4">
-            <h3 class="lesson">Lesson 5</h3>
-            <h4 class="lesson">I learned to learn</h4>
+          <block-lesson appearOnClick="3" class="block-full">
+            <h3 class="lesson">Blocks can also take the full width</h3>
+            <h4 class="lesson">Check the next page for more infos!</h4>
           </block-lesson>
         </block-lessons>
       </presentation-slide>
       <presentation-slide>
-        <h2>And summarized, appearing on click</h2>
+        <h2>Formatting your blocks</h2>
         <block-lessons id="lesson-2">
-          <block-lesson>
-            <h3>Lesson 1</h3>
-            <h4>Click on me to show the next lesson</h4>
+          <block-lesson class="block-half">
+            <block-code lang="plain">
+              I take the left half
+            </block-code>
           </block-lesson>
-          <block-lesson appearOnClick="1">
-            <h3 class="lesson">Lesson 2</h3>
-            <h4 class="lesson">I learned to learn</h4>
+          <block-lesson class="block-half">
+            <block-code lang="plain">
+              While I take the right! Quick, click me for more!
+            </block-code>
           </block-lesson>
-          <block-lesson appearOnClick="2">
-            <h3 class="lesson">Lesson 3</h3>
-            <h4 class="lesson">I learned to learn</h4>
+          <block-lesson appearOnClick="1" class="block-wide">
+            <block-code lang="plain">
+              I'm following the golden ratio
+            </block-code>
           </block-lesson>
-          <block-lesson appearOnClick="3">
-            <h3 class="lesson">Lesson 4</h3>
-            <h4 class="lesson">I learned to learn</h4>
+          <block-lesson appearOnClick="1" class="block-short">
+            <block-code lang="plain">
+              And together we are beautiful!
+            </block-code>
           </block-lesson>
-          <block-lesson appearOnClick="4">
-            <h3 class="lesson">Lesson 5</h3>
-            <h4 class="lesson">I learned to learn</h4>
+          <block-lesson appearOnClick="1" class="block-short">
+            <block-code lang="plain">
+              And it goes in either direction
+            </block-code>
+          </block-lesson>
+          <block-lesson appearOnClick="1" class="block-wide">
+            <block-code lang="plain">
+              And still we are beautiful!
+            </block-code>
           </block-lesson>
         </block-lessons>
       </presentation-slide>
       <presentation-slide>
+        <h2>Code gets highlighted for you!</h2>
         <block-code lang="javascript">
           // supports syntax highlight 
           if ("block-code") {
@@ -133,6 +100,63 @@
             } 
           }
         </block-code>
+      </presentation-slide>
+      <presentation-slide>
+        <figure>
+          <img src="https://picsum.photos/3000/1024">
+          <figcaption>Want semantic impact? Use big images with figure/figcaption</figcaption>
+        </figure>
+      </presentation-slide>
+      <presentation-slide style="background-image: url(https://picsum.photos/3000/1024);">
+        <h2 class="title light-contrast">Want big impact?<br>Use big image</h2>
+      </presentation-slide>
+      <presentation-slide>
+        <h2>Add tables to show data</h2>
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>A</th>
+              <th>B</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>2021-06-12</th>
+              <td>20</td>
+              <td>30</td>
+            </tr>
+            <tr>
+              <th>2021-06-13</th>
+              <td>10</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </presentation-slide>
+      <presentation-slide>
+        <block-lessons>
+          <block-lesson class="block-short">
+            <h4>And create plain text diagrams to explain graphs</h4>
+            <block-code lang="plain">
+  ┌────────────────┐            ┌─────────────────┐
+  │                │            │                 │
+  │                │            │                 │
+  │                │            │                 │
+  │                │            │                 │
+  │  Data flows    ├────────────►     to here     │
+  │  from here     │            │                 │
+  │                │            │                 │
+  │                │            │                 │
+  │                │            │                 │
+  └────────────────┘            └─────────────────┘
+            </block-code>
+          </block-lesson>
+          <block-lesson class="block-wide">
+            <h4>Or embed them from platforms like diagrams.net</h4>
+            <iframe frameborder="0" style="width:100%;height:70vh;" src="https://viewer.diagrams.net/?highlight=0000ff&edit=_blank&layers=1&nav=1&title=Untitled.drawio#R7VvZcuI4FP0aHpPywpZHIEt3TzpDN5lkXgUWoEG2GFmE0F%2FfV7a8KoCd4HZCqEpV0LUsWzpHV0fHdsMeuM83HC3n35mDacMynOeGfdmwLNO66MI%2FGdmEkW7TDAMzThxVKQmMyC%2BsgoaKroiD%2FUxFwRgVZJkNTpjn4YnIxBDnbJ2tNmU0e9UlmmEtMJogqkcfiSPmqhdWJ4l%2FwWQ2j65sti%2FCIy6KKque%2BHPksHUqZF817AFnTIS%2F3OcBpnLwonF5%2FLp5pLeL9s23H%2F7%2F6J%2F%2BX%2Fd3D2dhY9dlTom7wLEnXt30r8X0%2BstD879%2Fl8PrH2vjpjf%2BdqZOMZ4QXanxGmLuM0%2F1WGyiYfTXxKXIg1J%2FyjwxUkdgEPqIkpkHvydwd5hD4AlzQQCBnjog2BKikzmhzi3asJXsgy%2FQZBGV%2BnPGyS9oFlE4ZEIADnOhyGS1MzVG8kwIGxDl2Ic6w2hgzDh0i3yh6kwYpWjpk3Fww7KKi%2FiMeH0mBHOjhtjKc7CjSjHSQUFwtoi5I88vCIeCTY4Gfk6RUcFzg5mLBd9AFXU0ZtommnyqvE6Ia7ZVbJ4mra0mKVKTZRa3HV%2FuJ0wu5M1gEJLr2bnrNQteDxDJXA5RAN5DAvflMPppGsKPVFeTUEDOEkQ1NaLeIRdrNIWRFilKUjwVWwnpL9GEeLPboM5lM4n8VD2VIQbnTmlAhjlxHOwFZBFIoJBPkiFLRjwRDEWrD38wYAPjvNVowQ0NoGwmZfiT1bkYMA94hUhAIAxkXWNJ2BeotXPa7qfWJotYWWTTRMpAWhY%2FS080c%2BZJMt6t3DGkjWNDckdGmQuXqp9V4d2yasbb1vC%2BchGRp%2FUcB3K0fwL8oIB3ujUD3tQA1xCmJNAPajTMF9fWPfC7AKRsLsL7XtLh8szUOGHrnLBfwJ%2BiMaZD5hNBmGyfh3VzvKgra5tGsxiqO5b%2FN4Ha0rP2ik%2FmyJeJG2TXAoY3%2BHWE87kyUM26c3NbQ3UkVo7sZkHVb5xU%2F%2BFUv5lT%2FXa7WtVv5lS%2F3X2%2Fqr%2BznanHqhsLpp12YZq9lx1AV8OyB3cv3RvL%2BA5LydEheVBBWBrv2ncAFydBeHBQi6r8qvSgqfuFXyHxG1eARrDUWsY9k2WPM9nakc3otAZqVoVxt%2B5Ebepe2w2WK%2B4Iu8RDXAJ%2BjxZYN4k%2FOr5VQVq%2F5I9uYFc2xp7Tkw9coDSmTKrtPoSUHDeNsHhNaLRy7dHL2eUPOzMcTR1Mx2x9lQT6QQAOREwprbZ9BttSvB8y2F%2FMcIHdnLzbncC%2BBCTHFAnylH3utEObDyVxE11uGVldbhl2tomwk%2Bqs9IOesg2Fo6A1dDCrXvf%2BhpxNse8zXa6fdpjV7zDt%2FI6v6A6zY%2Bwl8QsbTLtZYIPZeR8bTFO3LUeIIpVxP%2BHaFk%2Fej7OxNHWXUkPvs%2B80ysNadP9Y2VZDdyk%2FlWKJEHvXksXMZfrOKyWLnWvI6uTupWrJohuN2x5TngRL9YKlZXQzdCj8Ioxl7lhktiuWVusDvQij%2B6gjwTHWH958FsXSKUyvd6NYdG90QMTxac6DOuDlca7dArd0uxSStji%2B19ZqBrr2l18s3TIFZS9XccsYMOcE%2BIEBL%2FxiTHWI64bqAMZEHKFzUDfW9ivF2OGw1g1NDeRPbzCUx7VVUIZV5TBYuvf3ABA5x7hAV4diu%2FZMrNt%2Ff6%2FEciXthZ58Vnkr58EJ0cKIXtSeb8tZf2wZjHU5cy%2F2Bc36rT41tnudvgjLvVafwllSKW1rRF%2FuvdH1i5%2FnxISxsk0Udf1azT0NbXH9tIbO8k%2Bccu2w6dTHlRiHlm4cGufnEfAJXQMzLpUI9qSdsbLkwjW8jyaLWcDfAaOMw3GPJQakcrut4jkhml%2Fqk0t1W43487PiRt3ZGxkVEfOPwaWbZ8WxivTTRwXrMLM%2Feif3j0One2YUeiEXeLTV%2B0zJ8Tyqugou4uDHGn031qVc9DcSQyPANq4UXycuDsMUO%2BviR0n6LVyBYvLBdVg9%2BWzdvvoN"></iframe>
+          </block-lesson>
+        </block-lessons>
       </presentation-slide>
       <presentation-slide last>
         <h1>Bye!</h1>
