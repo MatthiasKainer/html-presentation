@@ -4,11 +4,7 @@ A very simple web component for browser based presentations
 
 ## Install
 
-```sh
-npm install lit pure-lit html-presentations
-```
-
-from cdn
+Add the following snippet to your page:
 
 ```html
 <script
