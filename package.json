@@ -1,6 +1,6 @@
 {
   "name": "html-presentations",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Very lightweight webcomponent for presentations.",
   "main": "lib/index.js",
   "module": "lib/index.esm.js",
