@@ -39,7 +39,7 @@ type Props = {first: boolean; last: boolean};
 pureLit(
   'presentation-slide',
   (element: LitElementWithProps<Props>) => {
-    const myIndex = [...document.querySelectorAll("presentation-slide")].findIndex(val => {
+    const myIndex = [...(element.parentElement?.querySelectorAll("presentation-slide") ?? document.querySelectorAll("presentation-slide"))].findIndex(val => {
       return val === element
     })
     useOnce(element, () => {
