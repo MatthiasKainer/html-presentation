@@ -7,7 +7,8 @@
   "system": "lib/index.system.js",
   "scripts": {
     "build": "rollup -c",
-    "prepublish": "npm run build && npm test && git commit -am\"Release new version\" && git push",
+    "release:patch": "npm version patch -m 'Creating new release %s' && npm publish",
+    "prepublishOnly": "npm run build && npm test && git push",
     "test": "jest"
   },
   "keywords": [],
@@ -15,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "lit": "^2.0.0-rc.2",
-    "pure-lit": "^1.0.3"
+    "pure-lit": "^1.2.0"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.7",

@@ -6,18 +6,18 @@ import { lesson, lessons, prism } from "./blocks.styles";
 import * as events from "./events"
 
 pureLit("block-lessons", (el) => {
-    const { getState: clicks, publish: setClicks } = useState(el, 0)
+    const clicks = useState(el, 0)
     useOnce(el, () => {
         const click = () => {
-            const next = Math.min(clicks(), Number.MAX_SAFE_INTEGER-1) + 1;
-            setClicks(next);
+            const next = Math.min(clicks.get(), Number.MAX_SAFE_INTEGER-1) + 1;
+            clicks.set(next);
             window.postMessage({ type: events.block.click, clicks: next, source: el.id }, window.origin)
         }
         el.addEventListener("click", click);
         window.addEventListener('message', (event) => {
             if (event.data?.type === events.config.setPreviewMode) {
                 el.id = `${el.id}-preview-mode`
-                setClicks(Number.MAX_SAFE_INTEGER);
+                clicks.set(Number.MAX_SAFE_INTEGER);
                 window.postMessage({ type: events.block.click, clicks: Number.MAX_SAFE_INTEGER, source: el.id }, window.origin)
             }
         })
@@ -35,16 +35,16 @@ pureLit("block-lesson", (el: LitElementWithProps<BlockLesson>) => {
     const appearOnClick = el.attributes["appearOnClick" as any] 
         ? parseInt(el.attributes["appearOnClick" as any].value, 10) 
         : el.appearOnClick
-    const { getState: clicks, publish: setClicks } = useState<number>(el, 0)
+    const clicks = useState<number>(el, 0)
     useOnce(el, () => {
         window.addEventListener('message', (event) => {
             if (event.origin !== window.origin) return;
             if (event.data?.type === events.block.click && event.data?.source === el.parentElement?.id) {
-                setClicks(event.data["clicks"]);
+                clicks.set(event.data["clicks"]);
             }
         });
     })
-    return html`<slot class="${appearOnClick <= clicks() ? " visible" : "hidden" }"></slot>`
+    return html`<slot class="${appearOnClick <= clicks.get() ? " visible" : "hidden" }"></slot>`
 }, {
     styles: [lesson],
     defaults: {
